@@ -6,4 +6,8 @@
 
 local composer = require ("composer")		-- Include the Composer library
 
+-- hide status bar
+display.setStatusBar(display.HiddenStatusBar)
+
+-- goto splash screen
 composer.gotoScene("scenes.logo", "crossFade", 1000)
