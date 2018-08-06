@@ -32,13 +32,13 @@ end
 function scene:create( event )
     local mainGroup = self.view         -- We've initialized our mainGroup. This is a MUST for Composer library.
 
-    local sleepyBug = display.newImageRect( "assets/logo.png", 900, 285 )       -- Create a new image, logo.png (900px x 285px) from the assets folder. Default anchor point is center.
-    sleepyBug.x = display.contentCenterX        -- Assign the x value of the image to the center of the X axis.
-    sleepyBug.y = display.contentCenterY - sleepyBug.height / 2        -- Assign the y value of the image.
-    mainGroup:insert(sleepyBug)         -- Add the image to the display group.
+    local logo = display.newImageRect( "assets/logo.png", 900, 285 )       -- Create a new image, logo.png (900px x 285px) from the assets folder. Default anchor point is center.
+    logo.x = display.contentCenterX        -- Assign the x value of the image to the center of the X axis.
+    logo.y = display.contentCenterY - logo.height / 2        -- Assign the y value of the image.
+    mainGroup:insert(logo)         -- Add the image to the display group.
 
 
-    local nameDev = display.newText( "Dave Gill", 0, 0, native.systemFontBold, 64 )		-- Create a new text in (0, 0) using the system font with a size of 64.
+    local nameDev = display.newText( "Code - Dave Gill", 0, 0, native.systemFontBold, 64 )		-- Create a new text in (0, 0) using the system font with a size of 64.
     -- Use ( "text", x, y, width, height, font, fontSize ) for multi-line text. Defining height = 0 will make the object automatically adjust to the height of the given text.
     nameDev.x = display.contentCenterX
     nameDev.y = display.contentCenterY + nameDev.height / 2

@@ -28,10 +28,10 @@ end
 function scene:create( event )
     local mainGroup = self.view         -- We've initialized our mainGroup. This is a MUST for Composer library.
 
-    local sleepyBug = display.newImageRect( "assets/logo.png", 900, 285 )       -- Create a new image, logo.png (900px x 285px) from the assets folder. Default anchor point is center.
-    sleepyBug.x = display.contentCenterX        -- Assign the x value of the image to the center of the X axis.
-    sleepyBug.y = display.contentCenterY        -- Assign the y value of the image to the center of the Y axis.
-    mainGroup:insert(sleepyBug)         -- Add the image to the display group.
+    local logo = display.newImageRect( "assets/logo.png", 900, 285 )       -- Create a new image, logo.png (900px x 285px) from the assets folder. Default anchor point is center.
+    logo.x = display.contentCenterX        -- Assign the x value of the image to the center of the X axis.
+    logo.y = display.contentCenterY        -- Assign the y value of the image to the center of the Y axis.
+    mainGroup:insert(logo)         -- Add the image to the display group.
 
     -- Further reading of Display API -> http://docs.coronalabs.com/api/library/display/index.html
 end
