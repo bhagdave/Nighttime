@@ -7,28 +7,9 @@ local mainGroup         -- Our main display group. We will add display elements 
 -- For more information about groups, please refer to this guide -> http://docs.coronalabs.com/guide/graphics/group.html
 
 
-local variableText = composer.getVariable( "variableString" )		-- Get the variable "variableString" defined in main.lua
 local fontSize = composer.getVariable( "fontSize" )		-- Get the variable "fontSize" defined in main.lua
 
-
 local nameDev		-- Forward reference to nameDev
-local loopCount	= 0		-- Initialize loopCount
-
-
-
-local function changeText()
-	if ( loopCount == 120 ) then
-		nameDev.text = "Corona SDK"		-- Access the text of nameDev object and change it.
-	elseif ( loopCount == 240 ) then
-		nameDev.text = "Empty Project Template"		-- Access the text of nameDev object and change it.
-	elseif ( loopCount == 360 ) then
-		nameDev.text = "By Serkan Aksit"		-- Access the text of nameDev object and change it.
-		loopCount = 0
-	end
-
-	loopCount = loopCount + 1 		-- Increment the loop count
-end
-
 
 local function changeScene(event)
 	if ( event.phase == "began" ) then
@@ -74,23 +55,6 @@ end
 function scene:create( event )
     local mainGroup = self.view         -- We've initialized our mainGroup. This is a MUST for Composer library.
 
-    local sleepyBug = display.newImageRect( "assets/logo.png", 900, 285 )       -- Create a new image, logo.png (900px x 285px) from the assets folder. Default anchor point is center.
-    sleepyBug.x = display.contentCenterX        -- Assign the x value of the image to the center of the X axis.
-    sleepyBug.y = sleepyBug.height / 2        -- Assign the y value of the image.
-    mainGroup:insert(sleepyBug)         -- Add the image to the display group.
-
-
-    nameDev = display.newText( variableText, 0, 0, native.systemFontBold, fontSize )		-- Create a new text "variableText" in (0, 0) using the system font with a size of "fontSize".
-    -- Use ( "text", x, y, width, height, font, fontSize ) for multi-line text. Defining height = 0 will make the object automatically adjust to the height of the given text.
-    nameDev.x = display.contentCenterX
-    nameDev.y = display.contentCenterY + nameDev.height / 2
-    mainGroup:insert(nameDev)
-
-    -- Further reading of Display API -> http://docs.coronalabs.com/api/library/display/index.html
-
-
-    sleepyBug:addEventListener( "touch", changeScene )		-- Add a "touch" listener to the image to call changeScene(). Automatically removed, once the object is destroyed.
-    Runtime:addEventListener( "enterFrame", changeText )	-- Add an "enterFrame" listener to Runtime to changeText as the loop continues
 end
 
 
