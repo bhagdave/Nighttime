@@ -12,10 +12,44 @@ physics.start()
 physics.setGravity( 0, 0 )
 
 local gameLoopTimer
+local backGroup
+local mainGroup
+local player
+local background
 
 local function gameLoop()
+
 end
 
+local function movePlayer( event )
+end
+
+-- Configure image sheet
+local sheetOptions =
+{
+  frames =
+  {
+    {   -- 1) Player 1
+      x = 0,
+      y = 0,
+      width = 16,
+      height = 16
+    },
+    {   -- 2) Player 2 2
+      x = 16,
+      y = 0,
+      width = 16,
+      height = 16
+    },
+    {   -- 3) Player 3
+      x = 32,
+      y = 0,
+      width = 16,
+      height = 16
+    },
+  }
+}
+local objectSheet = graphics.newImageSheet( "assets/run.png", sheetOptions )
 
 -- -----------------------------------------------------------------------------------
 -- Scene event functions
@@ -27,6 +61,24 @@ function scene:create( event )
     local sceneGroup = self.view
     -- Code here runs when the scene is first created but has not yet appeared on screen
 
+    backGroup = display.newGroup()
+    sceneGroup:insert( backGroup )
+
+    mainGroup = display.newGroup()
+    sceneGroup:insert( mainGroup )
+
+    player = display.newImageRect( mainGroup, objectSheet, 4, 98, 79 )
+    player.x = display.contentCenterX
+    player.y = display.contentHeight - 100
+    physics.addBody( player, { radius=30, isSensor=true } )
+    player.myName = "player"
+
+    -- Load the background
+    background = display.newImageRect( backGroup, "assets/fullmoon.png", 1920, 1080 )
+    background.x = display.contentCenterX
+    background.y = display.contentCenterY
+    Runtime:addEventListener("touch", movePlayer)
+--    display:addEventListener( "tap", movePlayer )
 end
 
 
@@ -57,7 +109,7 @@ function scene:hide( event )
         timer.cancel( gameLoopTimer )
     elseif ( phase == "did" ) then
         -- Code here runs immediately after the scene goes entirely off screen
-
+    Runtime:removeEventListener( "touch", movePlayer )
     end
 end
 
