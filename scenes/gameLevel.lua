@@ -22,6 +22,11 @@ local function gameLoop()
 end
 
 local function movePlayer( event )
+    if (event.x < display.contentCenterX) then
+        player.x = player.x - 5
+    else 
+        player.x = player.x + 5
+    end
 end
 
 -- Configure image sheet
@@ -46,7 +51,7 @@ local sheetOptions =
       y = 0,
       width = 16,
       height = 16
-    },
+    }
   }
 }
 local objectSheet = graphics.newImageSheet( "assets/run.png", sheetOptions )
@@ -78,7 +83,6 @@ function scene:create( event )
     background.x = display.contentCenterX
     background.y = display.contentCenterY
     Runtime:addEventListener("touch", movePlayer)
---    display:addEventListener( "tap", movePlayer )
 end
 
 
