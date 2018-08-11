@@ -53,7 +53,7 @@ end
 local function gameLoop()
     if (player ~= nil) then
         mainGroup.maskX = player.x
-        mainGroup.maskY = player.y
+        mainGroup.maskY = player.y + 30
 --        player.x = player.x + player.deltaX
     end
     -- particleSystem:createParticle(
@@ -130,9 +130,9 @@ function scene:create( event )
     player.y = display.contentHeight - 200
     mainGroup:setMask( mask )
     mainGroup.maskX = player.x
-    mainGroup.maskY = player.y
-    mainGroup.maskScaleX = 1.75
-    mainGroup.maskScaleY = 1.75
+    mainGroup.maskY = player.y + 30
+    mainGroup.maskScaleX = 2.75
+    mainGroup.maskScaleY = 2.75
     physics.addBody( player, { radius=30, bounce=0.1 } )
     player.myName = "player"
 
