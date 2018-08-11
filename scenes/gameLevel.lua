@@ -69,6 +69,19 @@ local function gameLoop()
     -- })
 end
 
+local function onCollision( event )
+  if ( event.phase == "began" ) then
+
+    local obj1 = event.object1
+    local obj2 = event.object2
+
+    if ( obj1.myName == "mushroom" and obj2.myName == "player" ) then
+        display.remove( obj1 )
+    elseif ( obj1.myName == "player" and obj2.myName == "mushroom" ) then
+      display.remove( obj2 )
+    end
+  end
+end
 
 -- Configure image sheet
 local sheetOptions =
@@ -123,8 +136,8 @@ function scene:create( event )
     mushroom = display.newImageRect( mainGroup, "assets/mushroom.png", 64, 64)
     mushroom.x = display.contentCenterX - 70
     mushroom.y = display.contentHeight - 175
+    mushroom.myName = "mushroom"
     physics.addBody( mushroom, "static")
-
 
     -- local plat = display.newImageRect( mainGroup, "assets/platform.png", 300, 50 )
     -- plat.x = display.contentCenterX - 250
@@ -184,6 +197,7 @@ function scene:show( event )
         gameLoopTimer = timer.performWithDelay( 70, gameLoop, 0 )
         -- Add our key/joystick listeners
         Runtime:addEventListener( "key", key )
+        Runtime:addEventListener( "collision", onCollision )
     end
 end
 
@@ -199,8 +213,9 @@ function scene:hide( event )
         timer.cancel( gameLoopTimer )
     elseif ( phase == "did" ) then
         -- Code here runs immediately after the scene goes entirely off screen
-    physics.stop()
-    Runtime:removeEventListener( "key", key )
+        physics.stop()
+        Runtime:removeEventListener( "key", key )
+        Runtime:removeEventListener( "collision", onCollision )
     end
 end
 
