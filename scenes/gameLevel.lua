@@ -18,12 +18,8 @@ local uiGroup
 local player
 local background
 local platform
-
-local function gameLoop()
-    if (player ~= nil) then
---        player.x = player.x + player.deltaX
-    end
-end
+local lastEvent = {}
+local particleSystem
 
 local function movePlayerLeft( event )
     player.x = player.x - 3
@@ -36,6 +32,42 @@ end
 local function jumpPlayer()
     player:applyLinearImpulse( player.deltaX / 10, -0.5, player.x, player.y ) 
 end
+
+local function key( event )
+    local phase = event.phase
+    local name = event.keyName
+    if ( phase == lastEvent.phase ) and ( name == lastEvent.keyName ) then return false end  -- Filter repeating keys
+    if phase == "down" then
+        if "left" == name or "a" == name then
+            movePlayerLeft()
+        end
+        if "right" == name or "d" == name then
+            movePlayerRight()
+        elseif "space" == name or "buttonA" == name or "button1" == name then
+            jumpPlayer()
+        end
+    end
+    lastEvent = event
+end
+
+local function gameLoop()
+    if (player ~= nil) then
+        mainGroup.maskX = player.x
+        mainGroup.maskY = player.y
+--        player.x = player.x + player.deltaX
+    end
+    -- particleSystem:createParticle(
+    -- {
+    --     x = display.screenOriginX - 10,
+    --     y = 280,
+    --     velocityX = 90,
+    --     velocityY = -200,
+    --     color = { 0.1, 0.2, 0.5, 0.7 },
+    --     lifetime = 32.0,
+    --     flags = { "water", "colorMixing", "fixtureContactListener" }
+    -- })
+end
+
 
 -- Configure image sheet
 local sheetOptions =
@@ -81,7 +113,7 @@ function scene:create( event )
 
     mainGroup = display.newGroup()
     sceneGroup:insert( mainGroup )
-
+    local mask = graphics.newMask( "particle.png" )
     platform = display.newImageRect( mainGroup, "assets/platform.png", 1000, 50 )
     platform.x = display.contentCenterX - 100
     platform.y = display.contentHeight - 125
@@ -96,6 +128,11 @@ function scene:create( event )
     player.deltaX = 0
     player.x = display.contentCenterX
     player.y = display.contentHeight - 200
+    mainGroup:setMask( mask )
+    mainGroup.maskX = player.x
+    mainGroup.maskY = player.y
+    mainGroup.maskScaleX = 1.75
+    mainGroup.maskScaleY = 1.75
     physics.addBody( player, { radius=30, bounce=0.1 } )
     player.myName = "player"
 
@@ -112,10 +149,18 @@ function scene:create( event )
     jump:setFillColor( 255, 0, 0 )
     jump:addEventListener( "tap", jumpPlayer)    
 
+    -- particleSystem = physics.newParticleSystem({
+    --     filename = "particle.png",
+    --     radius = 4,
+    --     imageRadius = 6,
+    --     colorMixingStrength = 0.1,
+    --     blendMode = "add"
+    -- })
+
     -- Load the background
-    background = display.newImageRect( backGroup, "assets/fullmoon.png", 1920, 1080 )
-    background.x = display.contentCenterX
-    background.y = display.contentCenterY
+    -- background = display.newImageRect( backGroup, "assets/fullmoon.png", 1920, 1080 )
+    -- background.x = display.contentCenterX
+    -- background.y = display.contentCenterY
 end
 
 
@@ -130,6 +175,8 @@ function scene:show( event )
     elseif ( phase == "did" ) then
         -- Code here runs when the scene is entirely on screen
         gameLoopTimer = timer.performWithDelay( 70, gameLoop, 0 )
+        -- Add our key/joystick listeners
+        Runtime:addEventListener( "key", key )
     end
 end
 
@@ -145,8 +192,8 @@ function scene:hide( event )
         timer.cancel( gameLoopTimer )
     elseif ( phase == "did" ) then
         -- Code here runs immediately after the scene goes entirely off screen
-    physics.
-    Runtime:removeEventListener( "touch", movePlayer )
+    physics.stop()
+    Runtime:removeEventListener( "key", key )
     end
 end
 
