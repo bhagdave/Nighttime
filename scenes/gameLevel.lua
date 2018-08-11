@@ -20,6 +20,7 @@ local background
 local platform
 local lastEvent = {}
 local particleSystem
+local mushroom
 
 local function movePlayerLeft( event )
     player.x = player.x - 3
@@ -119,10 +120,16 @@ function scene:create( event )
     platform.y = display.contentHeight - 125
     physics.addBody( platform, "static")
 
-    local plat = display.newImageRect( mainGroup, "assets/platform.png", 300, 50 )
-    plat.x = display.contentCenterX - 250
-    plat.y = display.contentHeight - 200
-    physics.addBody( plat, "static")
+    mushroom = display.newImageRect( mainGroup, "assets/mushroom.png", 64, 64)
+    mushroom.x = display.contentCenterX - 70
+    mushroom.y = display.contentHeight - 175
+    physics.addBody( mushroom, "static")
+
+
+    -- local plat = display.newImageRect( mainGroup, "assets/platform.png", 300, 50 )
+    -- plat.x = display.contentCenterX - 250
+    -- plat.y = display.contentHeight - 200
+    -- physics.addBody( plat, "static")
 
     player = display.newImageRect( mainGroup, objectSheet, 4, 98, 79 )
     player.deltaX = 0
