@@ -9,24 +9,32 @@ local scene = composer.newScene()
 -- -----------------------------------------------------------------------------------
 local physics = require( "physics" )
 physics.start()
-physics.setGravity( 0, 0 )
+physics.setGravity( 0, 32 )
 
 local gameLoopTimer
 local backGroup
 local mainGroup
+local uiGroup
 local player
 local background
+local platform
 
 local function gameLoop()
-
+    if (player ~= nil) then
+--        player.x = player.x + player.deltaX
+    end
 end
 
-local function movePlayer( event )
-    if (event.x < display.contentCenterX) then
-        player.x = player.x - 5
-    else 
-        player.x = player.x + 5
-    end
+local function movePlayerLeft( event )
+    player.x = player.x - 3
+end
+
+local function movePlayerRight( event )
+    player.x = player.x + 3
+end
+
+local function jumpPlayer()
+    player:applyLinearImpulse( player.deltaX / 10, -0.5, player.x, player.y ) 
 end
 
 -- Configure image sheet
@@ -65,24 +73,49 @@ function scene:create( event )
 
     local sceneGroup = self.view
     -- Code here runs when the scene is first created but has not yet appeared on screen
-
     backGroup = display.newGroup()
     sceneGroup:insert( backGroup )
+
+    uiGroup = display.newGroup()
+    sceneGroup:insert( uiGroup )
 
     mainGroup = display.newGroup()
     sceneGroup:insert( mainGroup )
 
+    platform = display.newImageRect( mainGroup, "assets/platform.png", 1000, 50 )
+    platform.x = display.contentCenterX - 100
+    platform.y = display.contentHeight - 125
+    physics.addBody( platform, "static")
+
+    local plat = display.newImageRect( mainGroup, "assets/platform.png", 300, 50 )
+    plat.x = display.contentCenterX - 250
+    plat.y = display.contentHeight - 200
+    physics.addBody( plat, "static")
+
     player = display.newImageRect( mainGroup, objectSheet, 4, 98, 79 )
+    player.deltaX = 0
     player.x = display.contentCenterX
-    player.y = display.contentHeight - 100
-    physics.addBody( player, { radius=30, isSensor=true } )
+    player.y = display.contentHeight - 200
+    physics.addBody( player, { radius=30, bounce=0.1 } )
     player.myName = "player"
+
+    -- load buttons
+    local left = display.newRect( 75, display.contentHeight - 50, 150, 50 )
+    left:setFillColor( 0.5 )
+    left:addEventListener( "tap", movePlayerLeft)
+
+    local right = display.newRect( 245, display.contentHeight - 50, 150, 50 )
+    right:setFillColor( 0.5 )
+    right:addEventListener( "tap", movePlayerRight)
+
+    local jump = display.newRect( display.contentWidth - 75, display.contentHeight - 50, 150, 50 )
+    jump:setFillColor( 255, 0, 0 )
+    jump:addEventListener( "tap", jumpPlayer)    
 
     -- Load the background
     background = display.newImageRect( backGroup, "assets/fullmoon.png", 1920, 1080 )
     background.x = display.contentCenterX
     background.y = display.contentCenterY
-    Runtime:addEventListener("touch", movePlayer)
 end
 
 
@@ -94,10 +127,9 @@ function scene:show( event )
 
     if ( phase == "will" ) then
         -- Code here runs when the scene is still off screen (but is about to come on screen)
-
     elseif ( phase == "did" ) then
         -- Code here runs when the scene is entirely on screen
-        gameLoopTimer = timer.performWithDelay( 500, gameLoop, 0 )
+        gameLoopTimer = timer.performWithDelay( 70, gameLoop, 0 )
     end
 end
 
@@ -113,6 +145,7 @@ function scene:hide( event )
         timer.cancel( gameLoopTimer )
     elseif ( phase == "did" ) then
         -- Code here runs immediately after the scene goes entirely off screen
+    physics.
     Runtime:removeEventListener( "touch", movePlayer )
     end
 end
