@@ -20,5 +20,8 @@ end
 -- events so we don't have to write separate code for joystick, tilt, and keyboard control
 require( "com.ponywolf.joykey" ).start()
 
+system.activate("multitouch")
+
+
 -- goto splash screen
 composer.gotoScene("scenes.logo", "crossFade", 1000)

@@ -12,9 +12,9 @@ local mainGroup         -- Our main display group. We will add display elements 
 local function onButtonRelease (event)		-- This function will be called when the buttons are pressed
 	if ( event.phase == "ended" or event.phase == "cancelled" ) then 		-- Check if the tap ended or cancelled
         if ( event.target.id == "newGame" ) then
-            composer.gotoScene( "scenes.gameLevel", "crossFade", 1000 )
+            composer.gotoScene( "scenes.gameLevel", {effect = "crossFade", time = 1000, params = {} } )
         elseif ( event.target.id == "credits" ) then
-            composer.gotoScene( "scenes.creditScreen", "crossFade", 1000 )
+            composer.gotoScene( "scenes.creditScreen", {effect = "crossFade", time = 1000, params = {} } )
         end
     end
     return true 		-- To prevent more than one click
