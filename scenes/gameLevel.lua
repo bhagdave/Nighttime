@@ -19,7 +19,17 @@ function scene:create( event )
 
     local sceneGroup = self.view
     -- Code here runs when the scene is first created but has not yet appeared on screen
-    -- load buttons
+    -- Start physics
+    physics.start()
+    physics.setGravity( 0, 32 )
+
+    -- load the map
+    local filename = event.params.map or "scenes/game/maps/level1.json"
+    local mapData = json.decodeFile( system.pathForFile( filename, system.ResourceDirectory ) )
+    if (mapData) then
+        map = tiled.new( mapData, "scenes/game/maps" )
+        map.xScale, map.yScale = 0.85, 0.85
+    end
 end
 
 
