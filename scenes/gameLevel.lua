@@ -6,11 +6,19 @@ local physics = require( "physics" )
 local json = require( "json" )
 local scene = composer.newScene()
 
+-- local variables
+local map
 -- -----------------------------------------------------------------------------------
 -- Code outside of the scene event functions below will only be executed ONCE unless
 -- the scene is removed entirely (not recycled) via "composer.removeScene()"
 -- -----------------------------------------------------------------------------------
--- -----------------------------------------------------------------------------------
+-- ---------
+-- Function to scroll the map
+local function enterFrame( event )
+    local elapsed = event.time
+end
+
+--------------------------------------------------------------------------
 -- Scene event functions
 -- -----------------------------------------------------------------------------------
 
@@ -29,6 +37,7 @@ function scene:create( event )
     if (mapData) then
         map = tiled.new( mapData, "scenes/game/maps" )
         map.xScale, map.yScale = 0.85, 0.85
+        sceneGroup:insert( map )
     end
 end
 
@@ -41,7 +50,9 @@ function scene:show( event )
 
     if ( phase == "will" ) then
         -- Code here runs when the scene is still off screen (but is about to come on screen)
-    elseif ( phase == "did" ) then
+        fx.fadeIn() -- Fade up from black
+        Runtime:addEventListener( "enterFrame", enterFrame )
+   elseif ( phase == "did" ) then
         -- Code here runs when the scene is entirely on screen
     end
 end
@@ -57,6 +68,7 @@ function scene:hide( event )
         -- Code here runs when the scene is on screen (but is about to go off screen)
     elseif ( phase == "did" ) then
         -- Code here runs immediately after the scene goes entirely off screen
+        Runtime:removeEventListener( "enterFrame", enterFrame )
     end
 end
 
