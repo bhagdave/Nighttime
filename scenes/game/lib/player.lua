@@ -24,12 +24,12 @@ function M.new( instance, options )
 	instance.x,instance.y = x, y
 
 	-- Add physics
-	physics.addBody( instance, "dynamic", { radius = 54, density = 3, bounce = 0, friction =  1.0 } )
+	physics.addBody( instance, "dynamic", { radius = 20, density = 5, bounce = 0, friction =  2.7 } )
 	instance.isFixedRotation = true
 	instance.anchorY = 0.77
 
 	-- Keyboard control
-	local max, acceleration, left, right, flip = 375, 5000, 0, 0, 0
+	local max, acceleration, left, right, flip = 375, 1000, 0, 0, 0
 	local lastEvent = {}
 	local function key( event )
 		local phase = event.phase
@@ -38,11 +38,11 @@ function M.new( instance, options )
 		if phase == "down" then
 			if "left" == name or "a" == name then
 				left = -acceleration
-				flip = -0.133
+				--flip = -0.133
 			end
 			if "right" == name or "d" == name then
 				right = acceleration
-				flip = 0.133
+				--flip = 0.133
 			elseif "space" == name or "buttonA" == name or "button1" == name then
 				instance:jump()
 			end
@@ -62,7 +62,7 @@ function M.new( instance, options )
 
 	function instance:jump()
 		if not self.jumping then
-			self:applyLinearImpulse( 0, -550 )
+			self:applyLinearImpulse( 0, -100 )
 			--self:setSequence( "jump" )
 			self.jumping = true
 		end
@@ -120,11 +120,11 @@ function M.new( instance, options )
 		local y1, y2 = self.y + 50, other.y - other.height/2
 		if event.contact and ( y1 > y2 ) then
 			-- Don't bump into one way platforms
-			if other.floating then
-				event.contact.isEnabled = false
-			else
-				event.contact.friction = 0.1
-			end
+			--if other.floating then
+			event.contact.isEnabled = true
+			--else
+			event.contact.friction = 0.1
+			--end
 		end
 	end
 
@@ -162,8 +162,8 @@ function M.new( instance, options )
 	instance:addEventListener( "collision" )
 
 	-- Return instance
-	instance.name = "hero"
-	instance.type = "hero"
+	instance.name = "player"
+	instance.type = "player"
 	return instance
 end
 
