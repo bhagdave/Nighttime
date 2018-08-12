@@ -9,16 +9,13 @@ local mainGroup         -- Our main display group. We will add display elements 
 
 local tmr       -- Forward reference to a timer.
 
-
 -- Clean up method for memory purposes. This can be named anything you want
 local function cleanUp()
     -- Cleaning up the Timer object tmr
-    --if ( tmr ) then
+    if ( tmr ) then
         timer.cancel(tmr)
         tmr = nil
-    --end
-
-    -- If you are not sure if the tmr object exists or want to take a defensive approach, you can check it with if clause
+    end
 end
 
 local function changeScene()
@@ -32,8 +29,6 @@ function scene:create( event )
     logo.x = display.contentCenterX        -- Assign the x value of the image to the center of the X axis.
     logo.y = display.contentCenterY        -- Assign the y value of the image to the center of the Y axis.
     mainGroup:insert(logo)         -- Add the image to the display group.
-
-    -- Further reading of Display API -> http://docs.coronalabs.com/api/library/display/index.html
 end
 
 
@@ -44,21 +39,7 @@ function scene:show( event )
 
     elseif ( phase == "did" ) then      -- Scene is fully shown on the screen
 
-        -- Wait 4000 ms to show studio logo and then, call changeScene()
-        -- This will happen once since its iteration number is defined as 1.
-        -- You can define it as many as you want but consider the exceptional values 0 and -1, which will make the timer loop forever.
-        -- For more information about timers, please refer to this document -> http://docs.coronalabs.com/api/library/timer/index.html
         tmr = timer.performWithDelay( 4000, changeScene, 1 )        
-
-        --[[
-        Another method for the line above using Lua closures:
-
-        tmr = timer.performWithDelay( 4000, function () 
-        composer.gotoScene( "screens.gameIntro", "crossFade", 1500 ) 
-        end, 1 )
-
-        For more information about Lua closures, please refer to this guide -> http://www.lua.org/pil/6.1.html
-        ]]--
     end
 end
 
@@ -87,4 +68,3 @@ scene:addEventListener( "destroy", scene )
 
 return scene
 
--- You can refer to the official Composer template for more -> http://docs.coronalabs.com/api/library/composer/index.html#template
