@@ -7,7 +7,7 @@ local json = require( "json" )
 local scene = composer.newScene()
 
 -- local variables
-local map
+local map, player
 -- -----------------------------------------------------------------------------------
 -- Code outside of the scene event functions below will only be executed ONCE unless
 -- the scene is removed entirely (not recycled) via "composer.removeScene()"
@@ -16,6 +16,12 @@ local map
 -- Function to scroll the map
 local function enterFrame( event )
     local elapsed = event.time
+    -- Easy way to scroll a map based on a character
+    if player and player.x and player.y and not player.isDead then
+        local x, y = player:localToContent( 0, 0 )
+        x, y = display.contentCenterX - x, display.contentCenterY - y
+        map.x, map.y = map.x + x, map.y + y
+    end
 end
 
 --------------------------------------------------------------------------
@@ -38,6 +44,11 @@ function scene:create( event )
         map = tiled.new( mapData, "scenes/game/maps" )
         map.xScale, map.yScale = 0.85, 0.85
         sceneGroup:insert( map )
+        -- Find our player
+        map.extensions = "scenes.game.lib."
+        map:extend( "player" )
+        player = map:findObject( "player" )
+        player.filename = filename
     end
 end
 
