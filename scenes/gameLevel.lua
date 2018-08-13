@@ -5,9 +5,10 @@ local tiled = require( "com.ponywolf.ponytiled" )
 local physics = require( "physics" )
 local json = require( "json" )
 local scene = composer.newScene()
+local heartBar = require( "scenes.game.lib.health" )
 
 -- local variables
-local map, player
+local map, player, lives
 -- -----------------------------------------------------------------------------------
 -- Code outside of the scene event functions below will only be executed ONCE unless
 -- the scene is removed entirely (not recycled) via "composer.removeScene()"
@@ -43,13 +44,19 @@ function scene:create( event )
     if (mapData) then
         map = tiled.new( mapData, "scenes/game/maps" )
         map.xScale, map.yScale = 0.85, 0.85
-        sceneGroup:insert( map )
         -- Find our player
         map.extensions = "scenes.game.lib."
         map:extend( "player" )
         player = map:findObject( "player" )
         player.filename = filename
-    end
+        -- Add our hearts module
+        lives = heartBar.new()
+        lives.x = 48
+        lives.y = display.screenOriginY + lives.contentHeight / 2 + 16
+        player.lives = lives
+        sceneGroup:insert( map )
+        sceneGroup:insert( lives )
+    end 
 end
 
 
