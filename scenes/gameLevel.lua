@@ -49,6 +49,10 @@ function scene:create( event )
         map:extend( "player" )
         player = map:findObject( "player" )
         player.filename = filename
+
+        -- enemies
+        map:extend("fly")
+
         -- Add our hearts module
         lives = heartBar.new()
         lives.x = 48

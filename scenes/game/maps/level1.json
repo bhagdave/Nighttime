@@ -802,7 +802,7 @@
                      "friction":"float"
                     },
                  "rotation":0,
-                 "type":"enemy",
+                 "type":"fly",
                  "visible":true,
                  "width":72,
                  "x":-416,
@@ -879,6 +879,30 @@
                  "width":0,
                  "x":704,
                  "y":416
+                }, 
+                {
+                 "gid":21,
+                 "height":36,
+                 "id":106,
+                 "name":"fly",
+                 "properties":
+                    {
+                     "bodyType":"dynamic",
+                     "floating":true,
+                     "friction":1
+                    },
+                 "propertytypes":
+                    {
+                     "bodyType":"string",
+                     "floating":"bool",
+                     "friction":"float"
+                    },
+                 "rotation":0,
+                 "type":"fly",
+                 "visible":true,
+                 "width":72,
+                 "x":352,
+                 "y":608
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -886,7 +910,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":106,
+ "nextobjectid":107,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.1.6",

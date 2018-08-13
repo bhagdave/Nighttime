@@ -94,7 +94,7 @@ function M.new( instance, options )
 		local y1, y2 = self.y + 50, other.y - ( other.type == "enemy" and 25 or other.height/2 )
 		local vx, vy = self:getLinearVelocity()
 		if phase == "began" then
-			if not self.isDead and ( other.type == "blob" or other.type == "enemy" ) then
+			if not self.isDead and ( other.type == "fly" or other.type == "enemy" ) then
 				if y1 < y2 then
 					-- Hopped on top of an enemy
 					other:die()
