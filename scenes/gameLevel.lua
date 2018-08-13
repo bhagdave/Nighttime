@@ -58,6 +58,8 @@ function scene:create( event )
         lives.x = 48
         lives.y = display.screenOriginY + lives.contentHeight / 2 + 16
         player.lives = lives
+
+        scene.player = player
         sceneGroup:insert( map )
         sceneGroup:insert( lives )
     end 

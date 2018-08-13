@@ -18,7 +18,9 @@ function M.new( instance )
 		if phase == "began" and other.type == "player" then
 --			audio.play( sounds.coin )
 --			scene.score:add( 100 )
-			display.remove( self )
+			if (scene.player:addObject(instance.type, instance.name)) then
+				display.remove( self )
+			end
 		end
 	end
 

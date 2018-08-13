@@ -11,6 +11,8 @@ function M.new( instance, options )
 	-- Get the current scene
 	local scene = composer.getScene( composer.getSceneName( "current" ) )
 	local sounds = scene.sounds
+	local inventoryCount = 0
+	local inventory = {}
 
 	-- Default options for instance
 	options = options or {}
@@ -66,6 +68,15 @@ function M.new( instance, options )
 			--self:setSequence( "jump" )
 			self.jumping = true
 		end
+	end
+
+	function instance:addObject(type, name)
+		if inventoryCount > 2 then
+			return false
+		else
+			table.insert(inventory , {type, name})
+			return true
+		end 
 	end
 
 	function instance:hurt()
