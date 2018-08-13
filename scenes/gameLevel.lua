@@ -51,7 +51,7 @@ function scene:create( event )
         player.filename = filename
 
         -- enemies
-        map:extend("fly")
+        map:extend("fly", "key")
 
         -- Add our hearts module
         lives = heartBar.new()

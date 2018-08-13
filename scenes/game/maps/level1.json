@@ -787,30 +787,6 @@
                 {
                  "gid":21,
                  "height":36,
-                 "id":98,
-                 "name":"fly",
-                 "properties":
-                    {
-                     "bodyType":"dynamic",
-                     "floating":true,
-                     "friction":1
-                    },
-                 "propertytypes":
-                    {
-                     "bodyType":"string",
-                     "floating":"bool",
-                     "friction":"float"
-                    },
-                 "rotation":0,
-                 "type":"fly",
-                 "visible":true,
-                 "width":72,
-                 "x":-416,
-                 "y":480
-                }, 
-                {
-                 "gid":21,
-                 "height":36,
                  "id":106,
                  "name":"fly",
                  "properties":
@@ -831,6 +807,18 @@
                  "width":72,
                  "x":352,
                  "y":608
+                }, 
+                {
+                 "gid":23,
+                 "height":70,
+                 "id":108,
+                 "name":"blue",
+                 "rotation":0,
+                 "type":"key",
+                 "visible":true,
+                 "width":70,
+                 "x":-448,
+                 "y":512
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -838,7 +826,7 @@
          "x":0,
          "y":0
         }],
- "nextobjectid":107,
+ "nextobjectid":109,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.1.6",
@@ -856,8 +844,8 @@
          "margin":0,
          "name":"objs",
          "spacing":0,
-         "tilecount":26,
-         "tileheight":400,
+         "tilecount":25,
+         "tileheight":92,
          "tiles":
             {
              "0":
@@ -901,12 +889,6 @@
                  "image":"p1_stand.png",
                  "imageheight":92,
                  "imagewidth":66
-                },
-             "15":
-                {
-                 "image":"paper.png",
-                 "imageheight":400,
-                 "imagewidth":400
                 },
              "16":
                 {
@@ -1017,7 +999,7 @@
                  "imagewidth":70
                 }
             },
-         "tilewidth":400
+         "tilewidth":75
         }],
  "tilewidth":32,
  "type":"map",
