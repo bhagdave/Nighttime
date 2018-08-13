@@ -74,7 +74,7 @@ function M.new( instance, options )
 		if self.lives:damage() <= 0 then
 			-- We died
 			fx.fadeOut( function()
-				composer.gotoScene( "scene.refresh", { params = { map = self.filename } } )
+				composer.gotoScene( "scenes.refresh", { params = { map = self.filename } } )
 			end, 1500, 1000 )
 			instance.isDead = true
 			instance.isSensor = true
