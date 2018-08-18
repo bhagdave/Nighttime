@@ -33,6 +33,7 @@ function M.new( instance, options )
 	-- Keyboard control
 	local max, acceleration, left, right, flip = 175, 800, 0, 0, 0
 	local lastEvent = {}
+	local lastButton = {}
 	local function key( event )
 		local phase = event.phase
 		local name = event.keyName
@@ -40,11 +41,11 @@ function M.new( instance, options )
 		if phase == "down" then
 			if "left" == name or "a" == name then
 				left = -acceleration
-				--flip = -0.133
+				flip = -0.133
 			end
 			if "right" == name or "d" == name then
 				right = acceleration
-				--flip = 0.133
+				flip = 0.133
 			elseif "space" == name or "buttonA" == name or "button1" == name then
 				instance:jump()
 			end
@@ -62,24 +63,41 @@ function M.new( instance, options )
 		lastEvent = event
 	end
 
-	function instance:btnPressLeft( btn )
+	function instance:btnPressLeft()
+		if ( 'down' == lastButton.phase ) and ( 'left' == lastButton.button ) then return false end  -- Filter repeating keys
 		left = -acceleration
+		flip = -0.133
+		lastButton["button"] = 'left'
+		lastButton["phase"] = 'down'
 	end
 
-	function instance:btnPressRight( btn )
+	function instance:btnPressRight()
+		if ( 'down' == lastButton.phase ) and ( 'right' == lastButton.button ) then return false end  -- Filter repeating keys
 		right = acceleration
+		flip = 0.133
+		lastButton["button"] = 'right'
+		lastButton["phase"] = 'down'
 	end
 
-	function instance:btnReleaseLeft( btn )
+	function instance:btnReleaseLeft()
+		if ( 'up' == lastButton.phase ) and ( 'left' == lastButton.button ) then return false end  -- Filter repeating keys
 		left = 0
+		lastButton["button"] = 'left'
+		lastButton["phase"] = 'up'
 	end
 
-	function instance:btnReleaseRight( btn )
+	function instance:btnReleaseRight()
+		if ( 'up' == lastButton.phase ) and ( 'right' == lastButton.button ) then return false end  -- Filter repeating keys
 		right = 0
+		lastButton["button"] = 'right'
+		lastButton["phase"] = 'up'
 	end
 
 	function instance:btnPressJump()
+		if ( 'up' == lastButton.phase ) and ( 'jump' == lastButton.button ) then return false end  -- Filter repeating keys
 		instance:jump()
+		lastButton["button"] = 'jump'
+		lastButton["phase"] = 'up'
 	end
 
 	function instance:jump()
@@ -162,6 +180,7 @@ function M.new( instance, options )
 	local function enterFrame()
 		-- Do this every frame
 		local vx, vy = instance:getLinearVelocity()
+		print "Enter Frame"
 		local dx = left + right
 		if instance.jumping then dx = dx / 4 end
 		if ( dx < 0 and vx > -max ) or ( dx > 0 and vx < max ) then

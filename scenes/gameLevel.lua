@@ -107,8 +107,8 @@ function scene:create( event )
         scene.player = player
         sceneGroup:insert( map )
         sceneGroup:insert( lives )
-        sceneGroup:insert( btnLeft )
-        sceneGroup:insert( btnRight )
+      --  sceneGroup:insert( btnLeft )
+      --  sceneGroup:insert( btnRight )
     end 
 end
 

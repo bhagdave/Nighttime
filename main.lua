@@ -16,10 +16,6 @@ else
 	native.setProperty( "androidSystemUiVisibility", "immersiveSticky" ) 
 end
 
--- This module turns gamepad axis events and mobile accelerometer events into keyboard
--- events so we don't have to write separate code for joystick, tilt, and keyboard control
-require( "com.ponywolf.joykey" ).start()
-
 system.activate("multitouch")
 
 
