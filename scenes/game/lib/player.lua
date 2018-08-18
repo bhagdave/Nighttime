@@ -62,6 +62,14 @@ function M.new( instance, options )
 		lastEvent = event
 	end
 
+	function instance:buttons( btn )
+		if ( btn ) then
+			print "btn"
+		else
+			print "Nothing"
+		end
+	end
+
 	function instance:jump()
 		if not self.jumping then
 			self:applyLinearImpulse( 0, -100 )

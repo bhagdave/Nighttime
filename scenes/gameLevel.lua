@@ -6,6 +6,7 @@ local physics = require( "physics" )
 local json = require( "json" )
 local scene = composer.newScene()
 local heartBar = require( "scenes.game.lib.health" )
+local widget = require( "widget" )
 
 -- local variables
 local map, player, lives
@@ -22,6 +23,16 @@ local function enterFrame( event )
         local x, y = player:localToContent( 0, 0 )
         x, y = display.contentCenterX - x, display.contentCenterY - y
         map.x, map.y = map.x + x, map.y + y
+    end
+end
+
+-- Function to handle button events
+local function handleButtonEvent( event )
+    if ( "ended" == event.phase ) then
+--        event.keyName = event.target.name 
+        if scene.player then
+            scene.player:takeFocus( event )
+        end
     end
 end
 
@@ -50,6 +61,31 @@ function scene:create( event )
         player = map:findObject( "player" )
         player.filename = filename
 
+
+        -- Create the widget
+        local btnLeft = widget.newButton(
+            {
+                left = 50,
+                top = display.contentHeight - 100,
+                id = "left",
+                label = "<<",
+                width = 150,
+                onEvent = handleButtonEvent,
+                shape = "roundedRect"
+            }
+        )
+        local btnRight = widget.newButton(
+            {
+                left = 210,
+                top = display.contentHeight - 100,
+                id = "right",
+                label = ">>",
+                width = 150,
+                onEvent = handleButtonEvent,
+                shape = "roundedRect"
+            }
+        )
+
         -- enemies
         map:extend("fly", "key")
 
@@ -62,6 +98,8 @@ function scene:create( event )
         scene.player = player
         sceneGroup:insert( map )
         sceneGroup:insert( lives )
+        sceneGroup:insert( btnLeft )
+        sceneGroup:insert( btnRight )
     end 
 end
 
