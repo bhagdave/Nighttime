@@ -62,12 +62,20 @@ function M.new( instance, options )
 		lastEvent = event
 	end
 
-	function instance:buttons( btn )
-		if ( btn ) then
-			print "btn"
-		else
-			print "Nothing"
-		end
+	function instance:btnPressLeft( btn )
+		left = -acceleration
+	end
+
+	function instance:btnPressRight( btn )
+		right = acceleration
+	end
+
+	function instance:btnReleaseLeft( btn )
+		left = 0
+	end
+
+	function instance:btnReleaseRight( btn )
+		right = 0
 	end
 
 	function instance:jump()

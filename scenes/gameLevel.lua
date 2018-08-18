@@ -26,15 +26,7 @@ local function enterFrame( event )
     end
 end
 
--- Function to handle button events
-local function handleButtonEvent( event )
-    if ( "ended" == event.phase ) then
---        event.keyName = event.target.name 
-        if scene.player then
-            scene.player:takeFocus( event )
-        end
-    end
-end
+
 
 --------------------------------------------------------------------------
 -- Scene event functions
@@ -70,7 +62,8 @@ function scene:create( event )
                 id = "left",
                 label = "<<",
                 width = 150,
-                onEvent = handleButtonEvent,
+                onPress = player.btnPressLeft,
+                onRelease = player.btnReleaseLeft,
                 shape = "roundedRect"
             }
         )
@@ -81,7 +74,8 @@ function scene:create( event )
                 id = "right",
                 label = ">>",
                 width = 150,
-                onEvent = handleButtonEvent,
+                onPress = player.btnPressRight,
+                onRelease = player.btnReleaseRight,
                 shape = "roundedRect"
             }
         )
