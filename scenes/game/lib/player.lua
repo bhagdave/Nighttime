@@ -78,6 +78,10 @@ function M.new( instance, options )
 		right = 0
 	end
 
+	function instance:btnPressJump()
+		instance:jump()
+	end
+
 	function instance:jump()
 		if not self.jumping then
 			self:applyLinearImpulse( 0, -100 )

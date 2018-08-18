@@ -60,6 +60,7 @@ function scene:create( event )
                 left = 50,
                 top = display.contentHeight - 100,
                 id = "left",
+                fontSize = 24,
                 label = "<<",
                 width = 150,
                 onPress = player.btnPressLeft,
@@ -73,9 +74,23 @@ function scene:create( event )
                 top = display.contentHeight - 100,
                 id = "right",
                 label = ">>",
+                fontSize = 24,
                 width = 150,
                 onPress = player.btnPressRight,
                 onRelease = player.btnReleaseRight,
+                shape = "roundedRect"
+            }
+        )
+
+        local btnJump = widget.newButton(
+            {
+                left = display.contentWidth -160,
+                top = display.contentHeight - 100,
+                id = "up",
+                label = "^",
+                fontSize = 24,
+                width = 150,
+                onPress = player.btnPressJump,
                 shape = "roundedRect"
             }
         )
