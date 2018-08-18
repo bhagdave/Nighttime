@@ -7,7 +7,7 @@ local json = require( "json" )
 local scene = composer.newScene()
 local heartBar = require( "scenes.game.lib.health" )
 local widget = require( "widget" )
-
+local sceneGroup
 -- local variables
 local map, player, lives
 -- -----------------------------------------------------------------------------------
@@ -23,6 +23,8 @@ local function enterFrame( event )
         local x, y = player:localToContent( 0, 0 )
         x, y = display.contentCenterX - x, display.contentCenterY - y
         map.x, map.y = map.x + x, map.y + y
+        sceneGroup.maskX = display.contentCenterX 
+        sceneGroup.maskY = display.contentCenterY
     end
 end
 
@@ -35,7 +37,7 @@ end
 -- create()
 function scene:create( event )
 
-    local sceneGroup = self.view
+    sceneGroup = self.view
     -- Code here runs when the scene is first created but has not yet appeared on screen
     -- Start physics
     physics.start()
@@ -53,6 +55,7 @@ function scene:create( event )
         player = map:findObject( "player" )
         player.filename = filename
 
+        local mask = graphics.newMask( "particle.png" )
 
         -- Create the widget
         local btnLeft = widget.newButton(
@@ -103,7 +106,11 @@ function scene:create( event )
         lives.x = 48
         lives.y = display.screenOriginY + lives.contentHeight / 2 + 16
         player.lives = lives
-
+        sceneGroup:setMask( mask )
+        sceneGroup.maskX = player.x
+        sceneGroup.maskY = player.y 
+        sceneGroup.maskScaleX = 2.75
+        sceneGroup.maskScaleY = 2.75
         scene.player = player
         sceneGroup:insert( map )
         sceneGroup:insert( lives )
