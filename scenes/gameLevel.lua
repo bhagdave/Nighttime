@@ -7,6 +7,7 @@ local json = require( "json" )
 local scene = composer.newScene()
 local heartBar = require( "scenes.game.lib.health" )
 local widget = require( "widget" )
+local maskValue = 2.75
 local sceneGroup
 -- local variables
 local map, player, lives
@@ -25,9 +26,15 @@ local function enterFrame( event )
         map.x, map.y = map.x + x, map.y + y
         sceneGroup.maskX = display.contentCenterX 
         sceneGroup.maskY = display.contentCenterY
+        sceneGroup.maskScaleX = maskValue
+        sceneGroup.maskScaleY = maskValue
+        print (maskValue)
     end
 end
 
+local function torchGoingOut()
+    maskValue = maskValue - .01;
+end
 
 
 --------------------------------------------------------------------------
@@ -56,6 +63,8 @@ function scene:create( event )
         player.filename = filename
 
         local mask = graphics.newMask( "particle.png" )
+
+        timer.performWithDelay( 736, torchGoingOut, 0 )
 
         -- Create the widget
         local btnLeft = widget.newButton(
@@ -109,8 +118,8 @@ function scene:create( event )
         sceneGroup:setMask( mask )
         sceneGroup.maskX = player.x
         sceneGroup.maskY = player.y 
-        sceneGroup.maskScaleX = 2.75
-        sceneGroup.maskScaleY = 2.75
+        sceneGroup.maskScaleX = maskValue
+        sceneGroup.maskScaleY = maskValue
         scene.player = player
         sceneGroup:insert( map )
         sceneGroup:insert( lives )
