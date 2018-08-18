@@ -151,6 +151,10 @@ function M.new( instance, options )
 					-- They attacked us
 					self:hurt()
 				end
+			elseif not self.isDead and other.type == "exit" then
+				fx.fadeOut( function()
+					composer.gotoScene( "scenes.exit", { params = { map = self.filename } } )
+				end, 1500, 1000 )	
 			elseif self.jumping and vy > 0 and not self.isDead then
 				-- Landed after jumping
 				self.jumping = false
