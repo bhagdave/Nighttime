@@ -33,7 +33,9 @@ local function enterFrame( event )
 end
 
 local function torchGoingOut()
-    maskValue = maskValue - .01;
+    if maskValue > 0.25 then    
+        maskValue = maskValue - .01
+    end
 end
 
 
@@ -108,7 +110,7 @@ function scene:create( event )
         )
 
         -- enemies
-        map:extend("fly", "key")
+        map:extend("fly", "key", "ghost")
 
         -- Add our hearts module
         lives = heartBar.new()
@@ -122,9 +124,6 @@ function scene:create( event )
         sceneGroup.maskScaleY = maskValue
         scene.player = player
         sceneGroup:insert( map )
-        sceneGroup:insert( lives )
-      --  sceneGroup:insert( btnLeft )
-      --  sceneGroup:insert( btnRight )
     end 
 end
 

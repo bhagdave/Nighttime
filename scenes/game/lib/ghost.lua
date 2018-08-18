@@ -52,11 +52,6 @@ function M.new( instance )
 		if ( dx < 0 and vx > -max ) or ( dx > 0 and vx < max ) then
 			instance:applyForce( dx or 0, 0, instance.x, instance.y )
 		end
-		times = times + 1
-		if times > 5 then 
-			times = 0
-			direction = -direction 
-		end
 		-- Bumped
 		if math.abs( vx ) < 1 then
 			timeout = timeout + 1
