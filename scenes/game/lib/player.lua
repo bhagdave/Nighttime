@@ -115,10 +115,8 @@ function M.new( instance, options )
 		else
 			-- check if already in
 			if not( instance:checkInventory(type, name) > 0 ) then
-				print ("not found")
 				table.insert(self.inventory , {type, name})
 				self.inventoryCount = self.inventoryCount + 1
-				print ("inserted " .. type .. " " .. name .." to inventory")
 				i = 0
 				return true
 			end
@@ -128,10 +126,8 @@ function M.new( instance, options )
 	end
 
 	function instance:checkInventory(type, name)
-		print ("Looking for " .. type .. ":" .. name .. "in inventory")
 		for k, v in pairs(self.inventory) do
   			if ( v[1] == type ) and ( v[2] == name ) then
-  				print ("Found " .. type .. ":" .. name)
   				return k
   			end
 		end
@@ -145,9 +141,8 @@ function M.new( instance, options )
 	end
 
 	function instance:canILeave(name)
-		instance:printInventory()
+--		instance:printInventory()
 		local i = instance:checkInventory("key" , name)
-		print (i)
 		if i and ( i > 0 ) then
 			fx.fadeOut( function()
 				composer.gotoScene( "scenes.exit", { params = { map = self.filename } } )
@@ -170,8 +165,6 @@ function M.new( instance, options )
 			self.inventory = {}
 			self.inventoryCount = 0
 			instance.isSensor = true
-			print "dead"
-			instance:printInventory()
 			self:applyLinearImpulse( 0, -100 )
 			-- Death animation
 			--instance:setSequence( "ouch" )
@@ -200,7 +193,6 @@ function M.new( instance, options )
 				instance:canILeave(other.name)
 			elseif not self.isDead and other.type == "key" then
 				instance:addObject(other.type, other.name)
-				instance:printInventory()
 			elseif self.jumping and vy > 0 and not self.isDead then
 				-- Landed after jumping
 				self.jumping = false
