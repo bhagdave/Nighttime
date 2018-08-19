@@ -28,7 +28,7 @@ local function enterFrame( event )
         sceneGroup.maskY = display.contentCenterY
         sceneGroup.maskScaleX = maskValue
         sceneGroup.maskScaleY = maskValue
-        print (maskValue)
+        --print (maskValue)
     end
 end
 

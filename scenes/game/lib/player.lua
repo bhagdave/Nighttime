@@ -11,9 +11,6 @@ function M.new( instance, options )
 	-- Get the current scene
 	local scene = composer.getScene( composer.getSceneName( "current" ) )
 	local sounds = scene.sounds
-	local inventoryCount = 0
-	local inventory = {}
-
 	-- Default options for instance
 	options = options or {}
 
@@ -24,6 +21,9 @@ function M.new( instance, options )
 
 	instance = display.newImageRect( parent, "scenes/game/maps/p1_stand.png", 66, 92);
 	instance.x,instance.y = x, y
+
+	instance.inventory = {}
+	instance.inventoryCount = 0
 
 	-- Add physics
 	physics.addBody( instance, "dynamic", { radius = 20, density = 5, bounce = 0, friction =  2.7 } )
@@ -109,12 +109,53 @@ function M.new( instance, options )
 	end
 
 	function instance:addObject(type, name)
-		if inventoryCount > 2 then
+		if instance.inventoryCount >= 2  then
+			print "Too many objects"
 			return false
 		else
-			table.insert(inventory , {type, name})
-			return true
+			-- check if already in
+			if not( instance:checkInventory(type, name) > 0 ) then
+				print ("not found")
+				table.insert(self.inventory , {type, name})
+				self.inventoryCount = self.inventoryCount + 1
+				print ("inserted " .. type .. " " .. name .." to inventory")
+				i = 0
+				return true
+			end
 		end 
+		i = 0
+		return false
+	end
+
+	function instance:checkInventory(type, name)
+		print ("Looking for " .. type .. ":" .. name .. "in inventory")
+		for k, v in pairs(self.inventory) do
+  			if ( v[1] == type ) and ( v[2] == name ) then
+  				print ("Found " .. type .. ":" .. name)
+  				return k
+  			end
+		end
+		return 0
+	end
+
+	function instance:printInventory()
+		for k, v in pairs(instance.inventory) do
+			print( v[1] .. " " .. v[2] )
+		end
+	end
+
+	function instance:canILeave(name)
+		instance:printInventory()
+		local i = instance:checkInventory("key" , name)
+		print (i)
+		if i and ( i > 0 ) then
+			fx.fadeOut( function()
+				composer.gotoScene( "scenes.exit", { params = { map = self.filename } } )
+				end, 1500, 1000 
+			)
+		else
+			print (name .. "not found in inventory")
+		end
 	end
 
 	function instance:hurt()
@@ -126,7 +167,11 @@ function M.new( instance, options )
 				composer.gotoScene( "scenes.refresh", { params = { map = self.filename } } )
 			end, 1500, 1000 )
 			instance.isDead = true
+			self.inventory = {}
+			self.inventoryCount = 0
 			instance.isSensor = true
+			print "dead"
+			instance:printInventory()
 			self:applyLinearImpulse( 0, -100 )
 			-- Death animation
 			--instance:setSequence( "ouch" )
@@ -152,9 +197,10 @@ function M.new( instance, options )
 					self:hurt()
 				end
 			elseif not self.isDead and other.type == "exit" then
-				fx.fadeOut( function()
-					composer.gotoScene( "scenes.exit", { params = { map = self.filename } } )
-				end, 1500, 1000 )	
+				instance:canILeave(other.name)
+			elseif not self.isDead and other.type == "key" then
+				instance:addObject(other.type, other.name)
+				instance:printInventory()
 			elseif self.jumping and vy > 0 and not self.isDead then
 				-- Landed after jumping
 				self.jumping = false
@@ -184,7 +230,7 @@ function M.new( instance, options )
 	local function enterFrame()
 		-- Do this every frame
 		local vx, vy = instance:getLinearVelocity()
-		print "Enter Frame"
+--		print "Enter Frame"
 		local dx = left + right
 		if instance.jumping then dx = dx / 4 end
 		if ( dx < 0 and vx > -max ) or ( dx > 0 and vx < max ) then
