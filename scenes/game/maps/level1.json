@@ -1521,18 +1521,6 @@
                  "height":70,
                  "id":149,
                  "name":"matches",
-                 "properties":
-                    {
-                     "bodyType":"static",
-                     "floating":true,
-                     "friction":0
-                    },
-                 "propertytypes":
-                    {
-                     "bodyType":"string",
-                     "floating":"bool",
-                     "friction":"float"
-                    },
                  "rotation":0,
                  "type":"matches",
                  "visible":true,

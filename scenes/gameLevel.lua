@@ -110,7 +110,7 @@ function scene:create( event )
         )
 
         -- enemies
-        map:extend("fly", "key", "ghost")
+        map:extend("fly", "key", "ghost", "matches")
 
         -- Add our hearts module
         lives = heartBar.new()

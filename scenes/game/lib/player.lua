@@ -196,7 +196,6 @@ function M.new( instance, options )
 				end
 			elseif not self.isDead and other.type == "matches" then
 				instance:gotMatches()
-				other:die()
 			elseif not self.isDead and other.type == "exit" then
 				instance:canILeave(other.name)
 			elseif not self.isDead and other.type == "key" then
