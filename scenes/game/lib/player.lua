@@ -24,6 +24,7 @@ function M.new( instance, options )
 
 	instance.inventory = {}
 	instance.inventoryCount = 0
+	instance.lightValue = 2.75 -- Used for the mask around the player
 
 	-- Add physics
 	physics.addBody( instance, "dynamic", { radius = 20, density = 5, bounce = 0, friction =  2.7 } )
@@ -140,6 +141,10 @@ function M.new( instance, options )
 		end
 	end
 
+	function instance:gotMatches()
+		self.lightValue = 2.75
+	end
+
 	function instance:canILeave(name)
 --		instance:printInventory()
 		local i = instance:checkInventory("key" , name)
@@ -189,6 +194,9 @@ function M.new( instance, options )
 					-- They attacked us
 					self:hurt()
 				end
+			elseif not self.isDead and other.type == "matches" then
+				instance:gotMatches()
+				other:die()
 			elseif not self.isDead and other.type == "exit" then
 				instance:canILeave(other.name)
 			elseif not self.isDead and other.type == "key" then

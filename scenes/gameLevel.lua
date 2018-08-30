@@ -26,15 +26,15 @@ local function enterFrame( event )
         map.x, map.y = map.x + x, map.y + y
         sceneGroup.maskX = display.contentCenterX 
         sceneGroup.maskY = display.contentCenterY
-        sceneGroup.maskScaleX = maskValue
-        sceneGroup.maskScaleY = maskValue
+        sceneGroup.maskScaleX = player.lightValue
+        sceneGroup.maskScaleY = player.ligthValue
         --print (maskValue)
     end
 end
 
 local function torchGoingOut()
-    if maskValue > 0.25 then    
-        maskValue = maskValue - .01
+    if player.lightValue > 0.25 then    
+        player.lightValue = player.lightValue - .01
     end
 end
 
