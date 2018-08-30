@@ -6,6 +6,7 @@ local physics = require( "physics" )
 local json = require( "json" )
 local scene = composer.newScene()
 local heartBar = require( "scenes.game.lib.health" )
+local inventory = require( "scenes.game.lib.inventory" )
 local widget = require( "widget" )
 local maskValue = 2.75
 local sceneGroup
@@ -116,6 +117,12 @@ function scene:create( event )
         lives = heartBar.new()
         lives.x = 48
         lives.y = display.screenOriginY + lives.contentHeight / 2 + 16
+
+        -- Add inventory
+        itemsBar  =  inventory.new()
+        itemsBar.x = display.contentWidth - 64
+        itemsBar.y = display.screenOriginY + lives.contentHeight / 2 + 32
+        player.items = itemsBar
         player.lives = lives
         sceneGroup:setMask( mask )
         sceneGroup.maskX = player.x
