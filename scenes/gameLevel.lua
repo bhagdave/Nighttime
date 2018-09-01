@@ -121,7 +121,7 @@ function scene:create( event )
         -- Add inventory
         itemsBar  =  inventory.new()
         itemsBar.x = display.contentWidth - 64
-        itemsBar.y = display.screenOriginY + lives.contentHeight / 2 + 32
+        itemsBar.y = display.screenOriginY + itemsBar.contentHeight / 2 + 32
         player.items = itemsBar
         player.lives = lives
         sceneGroup:setMask( mask )

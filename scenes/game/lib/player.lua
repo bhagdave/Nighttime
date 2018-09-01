@@ -117,6 +117,7 @@ function M.new( instance, options )
 			-- check if already in
 			if not( instance:checkInventory(type, name) > 0 ) then
 				table.insert(self.inventory , {type, name})
+				self.items:addInventory(type .. name)
 				self.inventoryCount = self.inventoryCount + 1
 				i = 0
 				return true
