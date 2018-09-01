@@ -18,12 +18,12 @@ function M.new( options )
 
 	function group:addInventory(name)
 		table.insert(self.items, {name, "scenes/game/maps/" .. name .. ".png"})
-		-- for i = 1, table.getn(self.items) do
-		-- 	self.items[i] = display.newImageRect( "scenes/game/maps/keyBlue.png", w, h )
-		-- 	self.items[i].x = (i-1) * ( (w/2) + spacing )
-		-- 	self.items[i].y = 0
-		-- 	group:insert( self.items[i] )
-		-- end
+		for i = 1, table.getn(self.items) do
+			self.items[i] = display.newImageRect( "scenes/game/maps/keyBlue.png", w, h )
+			self.items[i].x = (i-1) * ( (w/2) + spacing )
+			self.items[i].y = 0
+			group:insert( self.items[i] )
+		end
 		-- group.count = max
 	end
 
