@@ -22,7 +22,7 @@ function M.new( instance, options )
 	instance = display.newImageRect( parent, "scenes/game/maps/p1_stand.png", 66, 92);
 	instance.x,instance.y = x, y
 
-	instance.inventory = {}
+	-- instance.inventory = {}
 	instance.inventoryCount = 0
 	instance.lightValue = 2.75 -- Used for the mask around the player
 
@@ -115,29 +115,16 @@ function M.new( instance, options )
 			return false
 		else
 			-- check if already in
-			if not( instance:checkInventory(type, name) > 0 ) then
-				table.insert(self.inventory , {type, name})
-				self.items:addInventory(type .. name:gsub("^%l", string.upper))
+			if not( self.items:checkInventory(type, name) > 0 ) then
+				--table.insert(self.inventory , {type, name})
+				local imageName = type .. name:gsub("^%l", string.upper)
+				print (imageName)
+				self.items:addInventory(type, name, imageName )
 				self.inventoryCount = self.inventoryCount + 1
 				return true
 			end
 		end 
 		return false
-	end
-
-	function instance:checkInventory(type, name)
-		for k, v in pairs(self.inventory) do
-  			if ( v[1] == type ) and ( v[2] == name ) then
-  				return k
-  			end
-		end
-		return 0
-	end
-
-	function instance:printInventory()
-		for k, v in pairs(instance.inventory) do
-			print( v[1] .. " " .. v[2] )
-		end
 	end
 
 	function instance:gotMatches()
@@ -146,7 +133,7 @@ function M.new( instance, options )
 
 	function instance:canILeave(name)
 --		instance:printInventory()
-		local i = instance:checkInventory("key" , name)
+		local i = self.items:checkInventory("key" , name)
 		if i and ( i > 0 ) then
 			fx.fadeOut( function()
 				composer.gotoScene( "scenes.exit", { params = { map = self.filename } } )
@@ -240,6 +227,8 @@ function M.new( instance, options )
 
 	function instance:finalize()
 		-- On remove, cleanup instance, or call directly for non-visual
+		self.inventory = nil
+		self.items = nil
 		instance:removeEventListener( "preCollision" )
 		instance:removeEventListener( "collision" )
 		Runtime:removeEventListener( "enterFrame", enterFrame )

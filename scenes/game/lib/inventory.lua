@@ -16,8 +16,8 @@ function M.new( options )
 	local group = display.newGroup()
 	group.items = {}
 
-	function group:addInventory(name)
-		table.insert(self.items, {name, "scenes/game/maps/" .. name .. ".png"})
+	function group:addInventory(type, name, image)
+		table.insert(self.items, {type, name, "scenes/game/maps/" .. image .. ".png"})
 		for i = 1, table.getn(self.items) do
 			group:remove(i)
 			self.items[i].image = display.newImageRect( self:getInventoryImage(i), w, h )
@@ -28,9 +28,17 @@ function M.new( options )
 	end
 
 	function group:getInventoryImage(i)
-		return self.items[i][2]
+		return self.items[i][3]
 	end
 
+	function group:checkInventory(type, name)
+		for k, v in pairs(self.items) do
+  			if ( v[1] == type ) and ( v[2] == name ) then
+  				return k
+  			end
+		end
+		return 0
+	end
 
 	function group:finalize()
 		-- On remove, cleanup instance 
