@@ -119,11 +119,9 @@ function M.new( instance, options )
 				table.insert(self.inventory , {type, name})
 				self.items:addInventory(type .. name:gsub("^%l", string.upper))
 				self.inventoryCount = self.inventoryCount + 1
-				-- i = 0
 				return true
 			end
 		end 
-		-- i = 0
 		return false
 	end
 
