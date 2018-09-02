@@ -117,13 +117,13 @@ function M.new( instance, options )
 			-- check if already in
 			if not( instance:checkInventory(type, name) > 0 ) then
 				table.insert(self.inventory , {type, name})
-				self.items:addInventory(type .. name)
+				self.items:addInventory(type .. name:gsub("^%l", string.upper))
 				self.inventoryCount = self.inventoryCount + 1
-				i = 0
+				-- i = 0
 				return true
 			end
 		end 
-		i = 0
+		-- i = 0
 		return false
 	end
 
