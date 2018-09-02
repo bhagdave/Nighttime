@@ -36,6 +36,7 @@ function M.new( options )
 
 	function group:drawInventory()
 		for i = 1, table.getn(self.items) do
+			print(i)
 			group:remove(i)
 			self.items[i].image = display.newImageRect( self:getInventoryImage(i), w, h )
 			self.items[i].image.x = (i-1) * ( (w/2) + spacing )

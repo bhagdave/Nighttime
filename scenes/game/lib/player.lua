@@ -132,6 +132,7 @@ function M.new( instance, options )
 	function instance:canILeave(name)
 		local i = self.items:checkInventory("key" , name)
 		if i and ( i > 0 ) then
+			self.items:removeIntentoryItem(i)
 			fx.fadeOut( function()
 				composer.gotoScene( "scenes.exit", { params = { map = self.filename } } )
 				end, 1500, 1000 
