@@ -9,8 +9,8 @@ local prevScene = composer.getSceneName( "previous" )
 local scene = composer.newScene()
 
 function scene:show( event )
-
-	local phase = event.phase
+  
+  	local phase = event.phase
 	local options = { params = event.params }
 	if ( phase == "will" ) then
 		composer.removeScene( prevScene )

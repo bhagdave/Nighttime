@@ -151,7 +151,7 @@ function M.new( instance, options )
 				composer.gotoScene( "scenes.refresh", { params = { map = self.filename } } )
 			end, 1500, 1000 )
 			instance.isDead = true
-			self.inventory = {}
+			self.items:removeAllItems(self.inventoryCount)
 			self.inventoryCount = 0
 			instance.isSensor = true
 			self:applyLinearImpulse( 0, -100 )
