@@ -18,13 +18,7 @@ function M.new( options )
 
 	function group:addInventory(type, name, image)
 		table.insert(self.items, {type, name, "scenes/game/maps/" .. image .. ".png"})
-		for i = 1, table.getn(self.items) do
-			group:remove(i)
-			self.items[i].image = display.newImageRect( self:getInventoryImage(i), w, h )
-			self.items[i].image.x = (i-1) * ( (w/2) + spacing )
-			self.items[i].image.y = 0
-			group:insert( self.items[i].image )
-		end
+		group:drawInventory()
 	end
 
 	function group:getInventoryImage(i)
@@ -38,6 +32,21 @@ function M.new( options )
   			end
 		end
 		return 0
+	end
+
+	function group:drawInventory()
+		for i = 1, table.getn(self.items) do
+			group:remove(i)
+			self.items[i].image = display.newImageRect( self:getInventoryImage(i), w, h )
+			self.items[i].image.x = (i-1) * ( (w/2) + spacing )
+			self.items[i].image.y = 0
+			group:insert( self.items[i].image )
+		end
+	end
+
+	function group:removeIntentoryItem(i)
+		table.remove(self.items, i)
+		group:drawInventory()
 	end
 
 	function group:finalize()

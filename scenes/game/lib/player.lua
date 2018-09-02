@@ -116,9 +116,7 @@ function M.new( instance, options )
 		else
 			-- check if already in
 			if not( self.items:checkInventory(type, name) > 0 ) then
-				--table.insert(self.inventory , {type, name})
 				local imageName = type .. name:gsub("^%l", string.upper)
-				print (imageName)
 				self.items:addInventory(type, name, imageName )
 				self.inventoryCount = self.inventoryCount + 1
 				return true
@@ -132,7 +130,6 @@ function M.new( instance, options )
 	end
 
 	function instance:canILeave(name)
---		instance:printInventory()
 		local i = self.items:checkInventory("key" , name)
 		if i and ( i > 0 ) then
 			fx.fadeOut( function()
