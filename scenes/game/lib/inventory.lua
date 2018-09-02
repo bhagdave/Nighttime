@@ -39,6 +39,7 @@ function M.new( options )
 		group:remove(2)
 		group:remove(1)
 --		group:remove(2)
+		self.items = {}
 	end
 
 	function group:drawInventory()
@@ -52,7 +53,6 @@ function M.new( options )
 	end
 
 	function group:removeIntentoryItem(i)
-		print("RemoveInventory item " .. i)
 		self.items[i].image:removeSelf()
 		table.remove(self.items, i)
 		group:drawInventory()
