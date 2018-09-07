@@ -50,6 +50,11 @@ function M.new( instance, options )
 			elseif "space" == name or "buttonA" == name or "button1" == name then
 				instance:jump()
 			end
+			if "down" == name then
+				if instance.items:dropItem() then 
+					instance.inventoryCount = instance.inventoryCount - 1
+				end  
+			end
 			if not ( left == 0 and right == 0 ) and not instance.jumping then
 				--instance:setSequence( "walk" )
 				--instance:play()
@@ -137,8 +142,6 @@ function M.new( instance, options )
 				composer.gotoScene( "scenes.exit", { params = { map = self.filename } } )
 				end, 1500, 1000 
 			)
-		else
-			print (name .. "not found in inventory")
 		end
 	end
 
@@ -183,7 +186,9 @@ function M.new( instance, options )
 			elseif not self.isDead and other.type == "exit" then
 				instance:canILeave(other.name)
 			elseif not self.isDead and other.type == "key" then
-				instance:addObject(other.type, other.name)
+				if instance:addObject(other.type, other.name) then
+					display.remove( other )
+				end
 			elseif self.jumping and vy > 0 and not self.isDead then
 				-- Landed after jumping
 				self.jumping = false

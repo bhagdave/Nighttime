@@ -15,10 +15,28 @@ function M.new( options )
 	-- Create display group to hold visuals
 	local group = display.newGroup()
 	group.items = {}
+	group.count = 0
 
 	function group:addInventory(type, name, image)
-		table.insert(self.items, {type, name, "scenes/game/maps/" .. image .. ".png"})
-		group:drawInventory()
+		if group.count < 2 then
+			table.insert(self.items, {type, name, "scenes/game/maps/" .. image .. ".png"})
+			group.count = group.count + 1
+			group:drawInventory()
+		end
+	end
+
+	function group:dropItem()
+		if group.count > 0 then
+			self.scene:insertIntoMap(self.items[group.count][3], 70, 70, self.items[group.count][1], self.items[group.count][2])
+			if self.items[group.count].image then
+				self.items[group.count].image:removeSelf()
+			end		
+			table.remove(self.items, group.count) 
+			group.count = group.count - 1
+			group:drawInventory()
+			return true
+		end
+		return false
 	end
 
 	function group:getInventoryImage(i)
@@ -44,6 +62,9 @@ function M.new( options )
 
 	function group:drawInventory()
 		for i = 1, table.getn(self.items) do
+			if self.items[i].image then
+				self.items[i].image:removeSelf()
+			end
 			self.items[i].image = display.newImageRect( self:getInventoryImage(i), w, h )
 			self.items[i].image.x = (i-1) * ( (w/2) + spacing )
 			self.items[i].image.y = 0
@@ -54,7 +75,7 @@ function M.new( options )
 	function group:removeIntentoryItem(i)
 		self.items[i].image:removeSelf()
 		table.remove(self.items, i)
-		group:drawInventory()
+	    group:drawInventory()
 	end
 
 	function group:finalize()
