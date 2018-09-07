@@ -50,6 +50,12 @@ function M.new( instance, options )
 			elseif "space" == name or "buttonA" == name or "button1" == name then
 				instance:jump()
 			end
+			if "down" == name then
+				print "dropping the item"
+				if instance.items:dropItem() then 
+					instance.inventoryCount = instance.inventoryCount - 1
+				end  
+			end
 			if not ( left == 0 and right == 0 ) and not instance.jumping then
 				--instance:setSequence( "walk" )
 				--instance:play()
@@ -183,7 +189,10 @@ function M.new( instance, options )
 			elseif not self.isDead and other.type == "exit" then
 				instance:canILeave(other.name)
 			elseif not self.isDead and other.type == "key" then
-				instance:addObject(other.type, other.name)
+				print("Colision with a key " .. other.type .. ":" .. other.name)
+				if instance:addObject(other.type, other.name) then
+					display.remove( other )
+				end
 			elseif self.jumping and vy > 0 and not self.isDead then
 				-- Landed after jumping
 				self.jumping = false
@@ -193,6 +202,10 @@ function M.new( instance, options )
 				else
 					--self:setSequence( "idle" )
 				end
+			end
+		elseif phase == "ended" then
+			if not self.isDead and other.type == "key" then
+				-- display.remove(other)
 			end
 		end
 	end

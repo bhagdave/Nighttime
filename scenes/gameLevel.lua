@@ -122,6 +122,7 @@ function scene:create( event )
         itemsBar  =  inventory.new()
         itemsBar.x = display.contentWidth - 128
         itemsBar.y = display.screenOriginY + itemsBar.contentHeight / 2 + 32
+        itemsBar.scene = self
         player.items = itemsBar
         player.lives = lives
         sceneGroup:setMask( mask )
@@ -130,6 +131,7 @@ function scene:create( event )
         sceneGroup.maskScaleX = maskValue
         sceneGroup.maskScaleY = maskValue
         scene.player = player
+        self.map = map
         sceneGroup:insert( map )
     end 
 end
@@ -150,6 +152,15 @@ function scene:show( event )
     end
 end
 
+function scene:insertIntoMap(imageName, x, y, type, name)
+    print("Adding " .. type .. " with " .. name)
+    newObject = display.newImageRect( self.map, imageName, 64, 64)
+    newObject.type = type
+    newObject.name = name
+    newObject.x = player.x + x
+    newObject.y = player.y + y
+    physics.addBody(newObject, "static", { isSensor=true })
+end
 
 -- hide()
 function scene:hide( event )
