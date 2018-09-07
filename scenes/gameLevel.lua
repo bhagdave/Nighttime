@@ -29,7 +29,6 @@ local function enterFrame( event )
         sceneGroup.maskY = display.contentCenterY
         sceneGroup.maskScaleX = player.lightValue
         sceneGroup.maskScaleY = player.ligthValue
-        --print (maskValue)
     end
 end
 
@@ -153,7 +152,6 @@ function scene:show( event )
 end
 
 function scene:insertIntoMap(imageName, x, y, type, name)
-    print("Adding " .. type .. " with " .. name)
     newObject = display.newImageRect( self.map, imageName, 64, 64)
     newObject.type = type
     newObject.name = name

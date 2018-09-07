@@ -51,7 +51,6 @@ function M.new( instance, options )
 				instance:jump()
 			end
 			if "down" == name then
-				print "dropping the item"
 				if instance.items:dropItem() then 
 					instance.inventoryCount = instance.inventoryCount - 1
 				end  
@@ -143,8 +142,6 @@ function M.new( instance, options )
 				composer.gotoScene( "scenes.exit", { params = { map = self.filename } } )
 				end, 1500, 1000 
 			)
-		else
-			print (name .. "not found in inventory")
 		end
 	end
 
@@ -189,7 +186,6 @@ function M.new( instance, options )
 			elseif not self.isDead and other.type == "exit" then
 				instance:canILeave(other.name)
 			elseif not self.isDead and other.type == "key" then
-				print("Colision with a key " .. other.type .. ":" .. other.name)
 				if instance:addObject(other.type, other.name) then
 					display.remove( other )
 				end
@@ -202,10 +198,6 @@ function M.new( instance, options )
 				else
 					--self:setSequence( "idle" )
 				end
-			end
-		elseif phase == "ended" then
-			if not self.isDead and other.type == "key" then
-				-- display.remove(other)
 			end
 		end
 	end
