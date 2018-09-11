@@ -106,6 +106,15 @@ function M.new( instance, options )
 		lastButton["phase"] = 'up'
 	end
 
+	function instance:btnPressDown()
+		if ( 'up' == lastButton.phase ) and ( 'down' == lastButton.button ) then return false end  -- Filter repeating keys
+		if instance.items:dropItem() then 
+			instance.inventoryCount = instance.inventoryCount - 1
+		end 
+		lastButton["button"] = 'down'
+		lastButton["phase"] = 'up'
+	end
+
 	function instance:jump()
 		if not self.jumping then
 			self:applyLinearImpulse( 0, -100 )

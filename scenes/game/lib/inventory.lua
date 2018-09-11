@@ -27,7 +27,7 @@ function M.new( options )
 
 	function group:dropItem()
 		if group.count > 0 then
-			self.scene:insertIntoMap(self.items[group.count][3], 70, 70, self.items[group.count][1], self.items[group.count][2])
+			self.scene:insertIntoMap(self.items[group.count][3], 70, 20, self.items[group.count][1], self.items[group.count][2])
 			if self.items[group.count].image then
 				self.items[group.count].image:removeSelf()
 			end		

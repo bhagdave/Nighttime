@@ -109,6 +109,20 @@ function scene:create( event )
             }
         )
 
+        local btnDrop = widget.newButton(
+            {
+                left = display.contentWidth -370,
+                top = display.contentHeight - 100,
+                id = "down",
+                label = "drop",
+                fontSize = 24,
+                width = 150,
+                onPress = player.btnPressDown,
+                shape = "roundedRect"
+            }
+        )
+
+
         -- enemies
         map:extend("fly", "key", "ghost", "matches")
 
@@ -157,7 +171,8 @@ function scene:insertIntoMap(imageName, x, y, type, name)
     newObject.name = name
     newObject.x = player.x + x
     newObject.y = player.y + y
-    physics.addBody(newObject, "static", { isSensor=true })
+--    physics.addBody(newObject, "static", { isSensor=true })
+    physics.addBody(newObject, "dynamic")
 end
 
 -- hide()
