@@ -24,7 +24,7 @@ function M.new( instance )
 --		audio.play( sounds.squish )
 		self.isFixedRotation = false
 		self.isSensor = true
-		self:applyLinearImpulse( 0, -100 )
+		self:applyLinearImpulse( 0, -20 )
 		self.isDead = true
 	end
 
@@ -53,21 +53,21 @@ function M.new( instance )
 			instance:applyForce( dx or 0, 0, instance.x, instance.y )
 		end
 		times = times + 1
-		if times > 5 then 
+		if times > 8 then 
 			times = 0
 			direction = -direction 
 		end
 		-- Bumped
 		if math.abs( vx ) < 1 then
 			timeout = timeout + 1
-			if timeout > 10 then
+			if timeout > 15 then
 				timeout = 0
 				direction, flip = -direction, -flip
 			end
 		end
 
 		-- Breathe
-		idle = idle + 0.08
+		idle = idle + 0.38
 		instance.yScale = 1 + ( 0.075 * math.sin( idle ) )
 
 		-- Turn around

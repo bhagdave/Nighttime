@@ -24,7 +24,7 @@ function M.new( instance )
 --		audio.play( sounds.squish )
 		self.isFixedRotation = false
 		self.isSensor = true
-		self:applyLinearImpulse( 0, -100 )
+		self:applyLinearImpulse( 0, -20 )
 		self.isDead = true
 	end
 
@@ -41,7 +41,7 @@ function M.new( instance )
 		end
 	end
 
-	local max, direction, flip, timeout, idle, times = 50, 150, -0.133, 0, 0, 0
+	local max, direction, flip, timeout, idle, times = 30, 150, -0.133, 0, 0, 0
 	direction = direction * ( ( instance.xScale < 0 ) and 1 or -1 )
 	flip = flip * ( ( instance.xScale < 0 ) and 1 or -1 )
 
@@ -55,7 +55,7 @@ function M.new( instance )
 		-- Bumped
 		if math.abs( vx ) < 1 then
 			timeout = timeout + 1
-			if timeout > 10 then
+			if timeout > 14 then
 				timeout = 0
 				direction, flip = -direction, -flip
 			end
