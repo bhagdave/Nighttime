@@ -1,4 +1,4 @@
--- screens.creditSceen
+-- screens.creditScreen
 
 local composer = require ("composer")       -- Include the Composer library. Please refer to -> https://docs.solar2d.com/api/library/composer/index.html
 local scene = composer.newScene()           -- Created a new scene
