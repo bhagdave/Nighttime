@@ -57,7 +57,7 @@ function M.screenFlash( color, blendMode, time )
 	end
 	-- Transitions are used to animate/interpolate an object's properties over time
 	-- See the Transitions/Tweens guide for more information:
-	-- https://docs.coronalabs.com/guide/media/transitionLib/index.html
+	-- https://docs.solar2d.com/guide/media/transitionLib/index.html
 	transition.to( overlay, { alpha = 0, time = time, transition = easing.outQuad, onComplete = destroy } )
 end
 

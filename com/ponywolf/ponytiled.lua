@@ -1,4 +1,4 @@
--- Project: PonyTiled a Corona Tiled Map Loader
+-- Project: PonyTiled a Solar2D Tiled Map Loader
 --
 -- Loads LUA saved map files from Tiled http://www.mapeditor.org/
 

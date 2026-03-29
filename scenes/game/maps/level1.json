@@ -1824,25 +1824,25 @@
                 },
              "26":
                 {
-                 "image":"..\/..\/..\/..\/..\/Downloads\/platformerGraphicsDeluxe_Updated\/Enemies\/slimeWalk1.png",
+                 "image":"slimeWalk1.png",
                  "imageheight":28,
                  "imagewidth":50
                 },
              "27":
                 {
-                 "image":"..\/..\/..\/..\/..\/Downloads\/platformerGraphicsDeluxe_Updated\/Tiles\/lock_blue.png",
+                 "image":"lock_blue.png",
                  "imageheight":70,
                  "imagewidth":70
                 },
              "28":
                 {
-                 "image":"..\/..\/..\/..\/..\/Downloads\/platformerGraphicsDeluxe_Updated\/Tiles\/lock_green.png",
+                 "image":"lock_green.png",
                  "imageheight":70,
                  "imagewidth":70
                 },
              "29":
                 {
-                 "image":"..\/..\/..\/..\/..\/Downloads\/platformerGraphicsDeluxe_Updated\/Tiles\/lock_red.png",
+                 "image":"lock_red.png",
                  "imageheight":70,
                  "imagewidth":70
                 },
@@ -1854,13 +1854,13 @@
                 },
              "30":
                 {
-                 "image":"..\/..\/..\/..\/..\/Downloads\/platformerGraphicsDeluxe_Updated\/Tiles\/lock_yellow.png",
+                 "image":"lock_yellow.png",
                  "imageheight":70,
                  "imagewidth":70
                 },
              "31":
                 {
-                 "image":"..\/..\/..\/..\/..\/Downloads\/platformerGraphicsDeluxe_Updated\/Tiles\/window.png",
+                 "image":"window.png",
                  "imageheight":70,
                  "imagewidth":70
                 },
