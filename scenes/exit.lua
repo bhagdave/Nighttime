@@ -1,11 +1,11 @@
 -- screens.endScreen
 
-local composer = require ("composer")       -- Include the Composer library. Please refer to -> http://docs.coronalabs.com/api/library/composer/index.html
+local composer = require ("composer")       -- Include the Composer library. Please refer to -> https://docs.solar2d.com/api/library/composer/index.html
 local prevScene = composer.getSceneName( "previous" )
 local scene = composer.newScene()           -- Created a new scene
 
 local mainGroup         -- Our main display group. We will add display elements to this group so Composer will handle these elements for us.
--- For more information about groups, please refer to this guide -> http://docs.coronalabs.com/guide/graphics/group.html
+-- For more information about groups, please refer to this guide -> https://docs.solar2d.com/guide/graphics/group.html
 
 
 -- If not defined here, removeEventListener will not work because changeScene won't be visible.
@@ -17,17 +17,17 @@ local function changeScene (event)
 	return true 		-- To prevent more than one click
 
 	-- For more information about events, please refer to the following documents
-    -- http://docs.coronalabs.com/api/event/index.html
-    -- http://docs.coronalabs.com/guide/index.html#events-and-listeners
+    -- https://docs.solar2d.com/api/event/index.html
+    -- https://docs.solar2d.com/guide/index.html#events-and-listeners
 end
 
 -- Clean up method for memory purposes. This can be named anything you want
 local function cleanUp()
-	-- Remove the Runtime event listener manually. Corona SDK doesn't handle Runtime listeners automatically.
+	-- Remove the Runtime event listener manually. Solar2D doesn't handle Runtime listeners automatically.
 	-- If not handled, it will probably throw out an error or show some unexpected behavior
     Runtime:removeEventListener( "touch", changeScene )
 
-    -- Corona SDK will remove the listeners that are attached to objects if the object is destroyed.
+    -- Solar2D will remove the listeners that are attached to objects if the object is destroyed.
 end
 
 function scene:create( event )
@@ -46,7 +46,7 @@ function scene:create( event )
     mainGroup:insert(nameDev)
 
 
-    -- Further reading of Display API -> http://docs.coronalabs.com/api/library/display/index.html
+    -- Further reading of Display API -> https://docs.solar2d.com/api/library/display/index.html
 end
 
 function scene:show( event )
@@ -83,4 +83,4 @@ scene:addEventListener( "destroy", scene )
 
 return scene
 
--- You can refer to the official Composer template for more -> http://docs.coronalabs.com/api/library/composer/index.html#template
+-- You can refer to the official Composer template for more -> https://docs.solar2d.com/api/library/composer/index.html#template

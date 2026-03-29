@@ -1,5 +1,5 @@
 --This is where you will handle orientation, define fonts, Android permissions, iOS settings, plugins and many other stuff.
---You can find more about this file here -> https://coronalabs.com/blog/2014/07/08/tutorial-understanding-build-settings/
+--You can find more about this file here -> https://docs.solar2d.com/guide/distribution/buildSettings/
 
 settings =
 {
@@ -7,7 +7,7 @@ settings =
     orientation =
     {
         default = "landscapeRight",  --initial launch orientation
-        content = "landscapeRight",  --locked orientation of the Corona stage, independent of Native UI elements (iOS only)
+        content = "landscapeRight",  --locked orientation of the Solar2D stage, independent of Native UI elements (iOS only)
         supported = { landscapeRight },  --table of allowed options for auto-orientation.
 
         --Options are: portrait, portraitUpsideDown, landscapeLeft, landscapeRight
@@ -27,7 +27,7 @@ settings =
     {
         plist =
         {   
-            --This is where you define fonts. You can find more about custom fonts here -> http://docs.coronalabs.com/guide/system/customFont/index.html
+            --This is where you define fonts. You can find more about custom fonts here -> https://docs.solar2d.com/guide/system/customFont/index.html
             UIAppFonts =
             {
                 --"BasultoHandLetter-Bold.ttf",
@@ -36,25 +36,25 @@ settings =
         },
     },
 
-    --Corona Plugins. More about what you can use and how you can integrate those are here -> http://docs.coronalabs.com/plugin/index.html
+    --Solar2D Plugins. More about what you can use and how you can integrate those are here -> https://docs.solar2d.com/plugin/
     plugins =
     {
         --[[
         ["facebook"] =
         {
-            publisherId = "com.coronalabs",
+            publisherId = "com.solar2d",
         },
-        
+
         -- key is the name passed to Lua's 'require()'
         ["CoronaProvider.gameNetwork.google"] =
         {
-            publisherId = "com.coronalabs",
+            publisherId = "com.solar2d",
             supportedPlatforms = { android = true }
         },
 
         ["plugin.google.play.services"] =
         {
-            publisherId = "com.coronalabs"
+            publisherId = "com.solar2d"
         },
         ]]--
     },

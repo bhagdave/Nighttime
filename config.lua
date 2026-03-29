@@ -1,4 +1,4 @@
---This is where you do the content scaling and some other stuff. You can look up to here for more -> http://docs.coronalabs.com/daily/guide/basics/configSettings/index.html
+--This is where you do the content scaling and some other stuff. You can look up to here for more -> https://docs.solar2d.com/guide/basics/configSettings/index.html
 
 application =
 {

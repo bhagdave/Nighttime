@@ -1,11 +1,11 @@
 -- screens.logo
 
-local composer = require ("composer")       -- Include the Composer library. Please refer to -> http://docs.coronalabs.com/api/library/composer/index.html
+local composer = require ("composer")       -- Include the Composer library. Please refer to -> https://docs.solar2d.com/api/library/composer/index.html
 local scene = composer.newScene()           -- Created a new scene
 
 
 local mainGroup         -- Our main display group. We will add display elements to this group so Composer will handle these elements for us.
--- For more information about groups, please refer to this guide -> http://docs.coronalabs.com/guide/graphics/group.html
+-- For more information about groups, please refer to this guide -> https://docs.solar2d.com/guide/graphics/group.html
 
 local tmr       -- Forward reference to a timer.
 

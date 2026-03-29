@@ -1,10 +1,10 @@
 -- screens.mainMenu
 
-local composer = require ("composer")       -- Include the Composer library. Please refer to -> http://docs.coronalabs.com/api/library/composer/index.html
+local composer = require ("composer")       -- Include the Composer library. Please refer to -> https://docs.solar2d.com/api/library/composer/index.html
 local scene = composer.newScene()           -- Created a new scene
 
 local widget = require ("widget")			-- Included the Widget library for buttons, tabs, sliders and many more
-											-- Please refer to -> http://docs.coronalabs.com/api/library/widget/index.html
+											-- Please refer to -> https://docs.solar2d.com/api/library/widget/index.html
 
 
 local mainGroup         -- Our main display group. We will add display elements to this group so Composer will handle these elements for us.
@@ -90,4 +90,4 @@ scene:addEventListener( "destroy", scene )
 
 return scene
 
--- You can refer to the official Composer template for more -> http://docs.coronalabs.com/api/library/composer/index.html#template
+-- You can refer to the official Composer template for more -> https://docs.solar2d.com/api/library/composer/index.html#template
